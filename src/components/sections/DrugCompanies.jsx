@@ -29,21 +29,32 @@ export default function DrugCompanies() {
       console.log("error", error);
     }
   };
+  const onSubmit = async (data) => {
+    const address = data.target.address.value;
+    const companyName = data.target.companyName.value;
+    try {
+      console.log("creatin tx...");
+      const tx = await drugAuthContract.addCompany(address, companyName);
+      console.log("executing tx..");
+      const result = await tx.wait();
+      console.log("result", result);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <Container style={{ minHeight: "90vh" }}>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Field>
           <label>Address</label>
-          <input placeholder="Address" />
+          <input name="address" placeholder="Address" />
         </Form.Field>
         <Form.Field>
           <label>Company Name</label>
-          <input placeholder="Company Name" />
+          <input name="companyName" placeholder="Company Name" />
         </Form.Field>
-        <Button onClick={onAddCompany} type="submit">
-          Add Company
-        </Button>
+        <Button type="submit">Add Company</Button>
       </Form>
     </Container>
   );
