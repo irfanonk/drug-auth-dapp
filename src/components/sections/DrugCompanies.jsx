@@ -50,20 +50,6 @@ export default function DrugCompanies() {
     }
   }, [drugAuthContract]);
 
-  const onAddCompany = async (inputData) => {
-    console.log("inputData", inputData.target);
-    try {
-      const _address = "0xf81cE08F1371aeCcEd9E9e3fdd44D77C65AF6CfE";
-      const _companyName = "accoutn 3";
-      console.log("creatin tx...");
-      const tx = await drugAuthContract.addCompany(_address, _companyName);
-      console.log("executing tx..");
-      const result = await tx.wait();
-      console.log("result", result);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
   const onSubmit = async (data) => {
     setError("");
 
